@@ -6,13 +6,14 @@ import MainMenu from "./MainMenu";
 import Viewport from "../../Wolfie2D/SceneGraph/Viewport";
 import RenderingManager from "../../Wolfie2D/Rendering/RenderingManager";
 import SceneManager from "../../Wolfie2D/Scene/SceneManager";
+import { GameEventType } from "../../Wolfie2D/Events/GameEventType";
 
 /**
  * The second level for HW4. It should be the goose dungeon / cave.
  */
 export default class Level2 extends HW3Level {
 
-    public static readonly PLAYER_SPAWN = new Vec2(32, 32);
+    public static readonly PLAYER_SPAWN = new Vec2(32, 64);
     public static readonly PLAYER_SPRITE_KEY = "PLAYER_SPRITE_KEY";
     public static readonly PLAYER_SPRITE_PATH = "hw4_assets/spritesheets/Hero.json";
 
@@ -64,15 +65,24 @@ export default class Level2 extends HW3Level {
         // Load in the tilemap
         this.load.tilemap(this.tilemapKey, Level2.TILEMAP_PATH);
         // Load in the player's sprite
-        this.load.spritesheet(this.playerSpriteKey, Level2.PLAYER_SPRITE_PATH);
+        // this.load.spritesheet(this.playerSpriteKey, Level2.PLAYER_SPRITE_PATH); Commented out because of Part 5
         // Audio and music
         this.load.audio(this.levelMusicKey, Level2.LEVEL_MUSIC_PATH);
-        this.load.audio(this.jumpAudioKey, Level2.JUMP_AUDIO_PATH);
-        this.load.audio(this.tileDestroyedAudioKey, Level2.TILE_DESTROYED_PATH);
+        // this.load.audio(this.jumpAudioKey, Level2.JUMP_AUDIO_PATH); Commented out because of Part 5
+        // this.load.audio(this.tileDestroyedAudioKey, Level2.TILE_DESTROYED_PATH); Commented out because of Part 5
+        this.emitter.fireEvent(GameEventType.PLAY_SOUND, {
+            key: this.levelMusicKey,
+            loop: true,
+            holdReference: true,
+        });
     }
 
     public unloadScene(): void {
         // TODO decide which resources to keep/cull 
+        //Nothing to cull. End of game.
+        this.emitter.fireEvent(GameEventType.STOP_SOUND, {
+            key: this.levelMusicKey
+        });
     }
 
     public startScene(): void {

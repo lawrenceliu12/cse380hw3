@@ -145,6 +145,9 @@ export default abstract class HW3Level extends Scene {
         while (this.receiver.hasNextEvent()) {
             this.handleEvent(this.receiver.getNextEvent());
         }
+        if (this.levelEndArea.collisionShape.overlaps(this.player.collisionShape)){
+            this.emitter.fireEvent(HW3Events.PLAYER_ENTERED_LEVEL_END);
+        }
     }
 
     /**
@@ -340,7 +343,7 @@ export default abstract class HW3Level extends Scene {
                 {
                     property: TweenableProperties.posX,
                     start: -300,
-                    end: 300,
+                    end: 150,
                     ease: EaseFunctionType.OUT_SINE
                 }
             ]
