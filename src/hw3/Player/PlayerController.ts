@@ -5,7 +5,11 @@ import OrthogonalTilemap from "../../Wolfie2D/Nodes/Tilemaps/OrthogonalTilemap";
 import Fall from "./PlayerStates/Fall";
 import Idle from "./PlayerStates/Idle";
 import Jump from "./PlayerStates/Jump";
-import Walk from "./PlayerStates/Walk";
+// import Walk from "./PlayerStates/Walk";
+import WalkingLeft from "./PlayerStates/WalkingLeft";
+import WalkingRight from "./PlayerStates/WalkingRight";
+import AttackingLeft from "./PlayerStates/AttackingLeft";
+import AttackingRight from "./PlayerStates/AttackingRight";
 
 import PlayerWeapon from "./PlayerWeapon";
 import Input from "../../Wolfie2D/Input/Input";
@@ -15,6 +19,8 @@ import HW3AnimatedSprite from "../Nodes/HW3AnimatedSprite";
 import MathUtils from "../../Wolfie2D/Utils/MathUtils";
 import { HW3Events } from "../HW3Events";
 import Dead from "./PlayerStates/Dead";
+import Taking_Damage from "./PlayerStates/TakingDamage";
+import Dying from "./PlayerStates/Dying";
 
 // TODO play your heros animations
 
@@ -23,7 +29,13 @@ import Dead from "./PlayerStates/Dead";
  */
 export const PlayerAnimations = {
     IDLE: "IDLE",
-    WALK: "WALK",
+    WALKING_LEFT: "WALKING_LEFT",
+    WALKING_RIGHT: "WALKING_RIGHT",
+    ATTACKING_LEFT: "ATTACKING_LEFT",
+    ATTACKING_RIGHT: "ATTACKING_RIGHT",
+    TAKING_DAMAGE: "TAKING_DAMAGE",
+    DYING: "DYING",
+    DEAD: "DEAD",
     JUMP: "JUMP",
 } as const
 
@@ -44,6 +56,12 @@ export const PlayerStates = {
 	JUMP: "JUMP",
     FALL: "FALL",
     DEAD: "DEAD",
+    WALKING_LEFT: "WALKING_LEFT",
+    WALKING_RIGHT: "WALKING_RIGHT",
+    ATTACKING_LEFT: "ATTACKING_LEFT",
+    ATTACKING_RIGHT: "ATTACKING_RIGHT",
+    TAKING_DAMAGE: "TAKING_DAMAGE",
+    DYING: "DYING"
 } as const
 
 /**
@@ -82,10 +100,17 @@ export default class PlayerController extends StateMachineAI {
 
         // Add the different states the player can be in to the PlayerController 
 		this.addState(PlayerStates.IDLE, new Idle(this, this.owner));
-		this.addState(PlayerStates.WALK, new Walk(this, this.owner));
+		// this.addState(PlayerStates.WALK, new Walk(this, this.owner));
         this.addState(PlayerStates.JUMP, new Jump(this, this.owner));
         this.addState(PlayerStates.FALL, new Fall(this, this.owner));
         this.addState(PlayerStates.DEAD, new Dead(this, this.owner));
+        this.addState(PlayerStates.WALKING_LEFT, new WalkingLeft(this, this.owner));
+        this.addState(PlayerStates.WALKING_RIGHT, new WalkingRight(this, this.owner));
+        this.addState(PlayerStates.ATTACKING_LEFT, new AttackingLeft(this, this.owner));
+        this.addState(PlayerStates.ATTACKING_RIGHT, new AttackingRight(this, this.owner));
+        this.addState(PlayerStates.TAKING_DAMAGE, new Taking_Damage(this, this.owner));
+        this.addState(PlayerStates.DYING, new Dying(this, this.owner));
+
         
         // Start the player in the Idle state
         this.initialize(PlayerStates.IDLE);
@@ -111,9 +136,10 @@ export default class PlayerController extends StateMachineAI {
         // If the player hits the attack button and the weapon system isn't running, restart the system and fire!
         if (Input.isPressed(HW3Controls.ATTACK) && !this.weapon.isSystemRunning()) {
             // Start the particle system at the player's current position
-            this.weapon.startSystem(500, 0, this.owner.position);
+            if (this._health > 0){
+                this.weapon.startSystem(500, 0, this.owner.position);
+            }
         }
-
 	}
 
     public get velocity(): Vec2 { return this._velocity; }
@@ -135,6 +161,8 @@ export default class PlayerController extends StateMachineAI {
         // When the health changes, fire an event up to the scene.
         this.emitter.fireEvent(HW3Events.HEALTH_CHANGE, {curhp: this.health, maxhp: this.maxHealth});
         // If the health hit 0, change the state of the player
-        if (this.health === 0) { this.changeState(PlayerStates.DEAD); }
+        if (this.health === 0) { 
+            this.changeState(PlayerStates.DEAD); 
+        }
     }
 }

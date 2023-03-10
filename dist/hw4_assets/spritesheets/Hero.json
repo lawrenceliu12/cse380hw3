@@ -1,23 +1,194 @@
 {
-    "name": "Hero",
-    "spriteSheetImage": "Hero.png",
-    "spriteWidth": 16,
-    "spriteHeight": 16,
-    "columns": 2,
-    "rows": 2,
-    "durationType": "time",
-    "animations": [
-        { 
-            "name": "IDLE",
-            "frames": [ {"index": 0, "duration": 540} ]
-        },
-        {
-            "name": "WALK",
-            "frames": [ {"index": 0, "duration": 16}, {"index": 1, "duration": 16}, {"index": 2, "duration": 16}, {"index": 3, "duration": 16} ]
-        },
-        {
-            "name": "JUMP",
-            "frames":[ {"index": 1, "duration": 32}]
-        }
-    ]
+	"name": "Hero",
+	"spriteSheetImage": "Hero.png",
+	"spriteWidth": 128,
+	"spriteHeight": 128,
+	"leftBuffer": 0,
+	"rightBuffer": 0,
+	"topBuffer": 0,
+	"bottomBuffer": 0,
+	"columns": 9,
+	"rows": 8,
+	"animations": [
+		{
+			"name": "IDLE",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 0,
+					"duration": 15
+				},
+				{
+					"index": 1,
+					"duration": 15
+				},
+				{
+					"index": 2,
+					"duration": 15
+				},
+				{
+					"index": 3,
+					"duration": 15
+				},
+				{
+					"index": 4,
+					"duration": 15
+				},
+				{
+					"index": 5,
+					"duration": 15
+				},
+				{
+					"index": 6,
+					"duration": 15
+				},
+				{
+					"index": 7,
+					"duration": 15
+				},
+				{
+					"index": 8,
+					"duration": 5
+				}
+			]
+		},
+		{
+			"name": "WALKING_LEFT",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 9,
+					"duration": 5
+				},
+				{
+					"index": 10,
+					"duration": 5
+				},
+				{
+					"index": 11,
+					"duration": 5
+				}
+			]
+		},
+		{
+			"name": "WALKING_RIGHT",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 18,
+					"duration": 5
+				},
+				{
+					"index": 19,
+					"duration": 5
+				},
+				{
+					"index": 20,
+					"duration": 5
+				},
+				{
+					"index": 21,
+					"duration": 5
+				}
+			]
+		},
+		{
+			"name": "ATTACKING_LEFT",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 27,
+					"duration": 5
+				},
+				{
+					"index": 28,
+					"duration": 5
+				},
+				{
+					"index": 29,
+					"duration": 5
+				},
+				{
+					"index": 30,
+					"duration": 5
+				},
+				{
+					"index": 31,
+					"duration": 5
+				}
+			]
+		},
+		{
+			"name": "ATTACKING_RIGHT",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 36,
+					"duration": 5
+				},
+				{
+					"index": 37,
+					"duration": 5
+				},
+				{
+					"index": 38,
+					"duration": 5
+				},
+				{
+					"index": 39,
+					"duration": 5
+				},
+				{
+					"index": 40,
+					"duration": 5
+				}
+			]
+		},
+		{
+			"name": "TAKING_DAMAGE",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 45,
+					"duration": 10
+				},
+				{
+					"index": 46,
+					"duration": 10
+				},
+				{
+					"index": 47,
+					"duration": 10
+				}
+			]
+		},
+		{
+			"name": "DYING",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 54,
+					"duration": 50
+				},
+				{
+					"index": 55,
+					"duration": 50
+				},
+				{
+					"index": 56,
+					"duration": 50
+				}
+			]
+		},
+		{
+			"name": "DEAD",
+			"repeat": true,
+			"frames": [
+				{
+					"index": 63,
+					"duration": 25
+				}
+			]
+		}
+	]
 }

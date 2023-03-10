@@ -20,9 +20,17 @@ export default class Idle extends PlayerState {
 		let dir = this.parent.inputDir;
 
         // If the player is moving along the x-axis, transition to the walking state
-		if (!dir.isZero() && dir.y === 0){
-			this.finished(PlayerStates.WALK);
+		if (!(dir.x === 0) && dir.y === 0){
+            if (dir.x === 1){
+                this.finished(PlayerStates.WALKING_RIGHT);
+            }
+            else if (dir.x === -1){
+                this.finished(PlayerStates.WALKING_RIGHT);
+            }
 		} 
+        else if (Input.isJustPressed(HW3Controls.ATTACK)){
+            this.finished(PlayerStates.ATTACKING_RIGHT);
+        }
         // If the player is jumping, transition to the jumping state
         else if (Input.isJustPressed(HW3Controls.JUMP)) {
             this.finished(PlayerStates.JUMP);

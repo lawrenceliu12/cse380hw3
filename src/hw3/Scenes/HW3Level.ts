@@ -403,11 +403,13 @@ export default abstract class HW3Level extends Scene {
 
         // Add the player to the scene
         this.player = this.add.animatedSprite(key, HW3Layers.PRIMARY);
-        this.player.scale.set(1, 1);
+        this.player.scale.set(0.125, 0.125);
         this.player.position.copy(this.playerSpawn);
+        console.log(this.player.position);
         
         // Give the player physics
         this.player.addPhysics(new AABB(this.player.position.clone(), this.player.boundary.getHalfSize().clone()));
+        this.player.setGroup(HW3PhysicsGroups.PLAYER);
 
         // TODO - give the player their flip tween
 
@@ -430,6 +432,19 @@ export default abstract class HW3Level extends Scene {
                 }
             ],
             onEnd: HW3Events.PLAYER_DEAD
+        });
+
+        this.player.tweens.add(PlayerTweens.FLIP, {
+            startDelay: 0,
+            duration: 700,
+            effects: [
+                {
+                    property: "rotation",
+                    start: 0,
+                    end: 2 * Math.PI,
+                    ease: EaseFunctionType.IN_OUT_QUAD,
+                }
+            ]
         });
 
         // Give the player it's AI
