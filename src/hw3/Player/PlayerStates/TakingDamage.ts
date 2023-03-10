@@ -12,14 +12,13 @@ export default class Taking_Damage extends PlayerState {
     public handleInput(event: GameEvent): void { }
 
     public update(deltaT: number): void {
-        if(!this.owner.animation.isPlaying("TAKING_DAMAGE")){
+        if(!this.owner.animation.isPlaying(PlayerAnimations.TAKING_DAMAGE)){
             if(this.parent.health > 0){
                 this.finished(PlayerStates.IDLE);
             }
             else{
                 this.finished(PlayerStates.DYING);
             }
-            
         }
     }
 

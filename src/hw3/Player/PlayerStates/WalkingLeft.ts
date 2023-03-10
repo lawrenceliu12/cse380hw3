@@ -16,7 +16,6 @@ export default class WalkingLeft extends PlayerState {
 
         // Get the input direction from the player controller
 		let dir = this.parent.inputDir;
-        console.log("a", dir)
 
         // If the player is not moving - transition to the Idle state
 		if(dir.isZero()){
