@@ -13,7 +13,7 @@ import { GameEventType } from "../../Wolfie2D/Events/GameEventType";
  */
 export default class Level2 extends HW3Level {
 
-    public static readonly PLAYER_SPAWN = new Vec2(32, 64);
+    public static readonly PLAYER_SPAWN = new Vec2(32, 72);
     public static readonly PLAYER_SPRITE_KEY = "PLAYER_SPRITE_KEY";
     public static readonly PLAYER_SPRITE_PATH = "hw4_assets/spritesheets/Hero.json";
 
