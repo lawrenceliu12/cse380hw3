@@ -3,7 +3,8 @@ import ParticleSystem from "../../Wolfie2D/Rendering/Animations/ParticleSystem";
 import Color from "../../Wolfie2D/Utils/Color";
 import { EaseFunctionType } from "../../Wolfie2D/Utils/EaseFunctions";
 import RandUtils from "../../Wolfie2D/Utils/RandUtils";
-
+import Input from "../../Wolfie2D/Input/Input";
+import Vec2 from "../../Wolfie2D/DataTypes/Vec2";
  
 
 /**
@@ -31,7 +32,17 @@ export default class PlayerWeapon extends ParticleSystem {
      */
     public setParticleAnimation(particle: Particle) {
         // Give the particle a random velocity.
-        particle.vel = RandUtils.randVec(100, 200, -32, 32);
+        // particle.vel = RandUtils.randVec(100, 200, -32, 32);
+        let position: Vec2;
+        position = this.sourcePoint.vecTo(Input.getGlobalMousePosition());
+
+        particle.vel = RandUtils.randVec(
+            position.x + 75,
+            position.x - 25,
+            position.y + 75,
+            position.y - 25,             
+        );
+
         particle.color = Color.RED;
 
         // Give the particle tweens

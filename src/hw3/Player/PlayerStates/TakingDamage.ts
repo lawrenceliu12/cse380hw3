@@ -15,7 +15,8 @@ export default class Taking_Damage extends PlayerState {
         if(!this.owner.animation.isPlaying("TAKING_DAMAGE")){
             if(this.parent.health > 0){
                 this.finished(PlayerStates.IDLE);
-            }else{
+            }
+            else{
                 this.finished(PlayerStates.DYING);
             }
             
