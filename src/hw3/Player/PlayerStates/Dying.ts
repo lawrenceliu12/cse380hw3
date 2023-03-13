@@ -10,6 +10,11 @@ export default class Dying extends PlayerState {
 
     // Trigger the player's death animation when we enter the dead state
     public onEnter(options: Record<string, any>): void {
+        this.emitter.fireEvent(GameEventType.PLAY_SOUND, {
+            key: this.owner.getScene().getDyingAudioKey(),
+            loop: false,
+            holdReference: false,
+        })
         this.owner.animation.play(PlayerAnimations.DYING, false);
     }
 

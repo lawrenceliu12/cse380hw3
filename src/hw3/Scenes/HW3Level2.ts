@@ -24,13 +24,16 @@ export default class Level2 extends HW3Level {
     public static readonly WALLS_LAYER_KEY = "Main";
 
     public static readonly LEVEL_MUSIC_KEY = "LEVEL_MUSIC";
-    public static readonly LEVEL_MUSIC_PATH = "hw4_assets/music/hw5_level_music.wav";
+    public static readonly LEVEL_MUSIC_PATH = "hw4_assets/music/level_music.wav";
 
     public static readonly JUMP_AUDIO_KEY = "PLAYER_JUMP";
     public static readonly JUMP_AUDIO_PATH = "hw4_assets/sounds/jump.wav";
 
     public static readonly TILE_DESTROYED_KEY = "TILE_DESTROYED";
     public static readonly TILE_DESTROYED_PATH = "hw4_assets/sounds/switch.wav";
+
+    public static readonly DYING_AUDIO_KEY = "DYING";
+    public static readonly DYING_AUDIO_PATH = "hw4_assets/sounds/dying.wav";
 
     public static readonly LEVEL_END = new AABB(new Vec2(224, 232), new Vec2(24, 16));
 
@@ -56,6 +59,8 @@ export default class Level2 extends HW3Level {
         // Level end size and position
         this.levelEndPosition = new Vec2(32, 216).mult(this.tilemapScale);
         this.levelEndHalfSize = new Vec2(32, 32).mult(this.tilemapScale);
+
+        this.dyingAudioKey = Level2.DYING_AUDIO_KEY;
 
     }
     /**
